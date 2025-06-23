@@ -6,11 +6,11 @@
   <title>for my girlfriend <3 </title>
   <style>
     body {
-      background: linear-gradient(135deg, #b3e5fc, #e1f5fe);
+      background: linear-gradient(135deg, #045, #377);
       font-family: 'Segoe UI', sans-serif;
       text-align: center;
       padding: 50px;
-      color: #045;
+      color: #b3e5fc;
       overflow-x: hidden;
     }
 
@@ -22,7 +22,7 @@
     h2 {
       font-size: 1.2em;
       font-weight: normal;
-      color: #377;
+      color: #b3e5fc;
     }
 
     .calendar-img, .extra-img {
@@ -55,17 +55,36 @@
 <body>
   <div class="confetti">✨ 🐉 ✨</div>
 
-  <h1>Faltan solo 2 días para tu cumpleaños</h1>
+  <h1 id="countdown-title">Calculando...</h1>
   <h2>La conmemoración anual de la creación de la cosita más bonita de este mundo 🌎💖</h2>
 
   <img class="calendar-img" src="junio-25.png" alt="Calendario junio con el día 25 subrayado" />
 
   <p class="message">
-    Quiero hacerte saber que sos increíble y que estoy muy agradecido de tenerte en mi vida, me gustaría iniciar esta cuenta regresiva regalandote una subscripción lunita 🌙
+    Quiero hacerte saber que sos increíble y que estoy muy agradecido de tenerte en mi vida, me gustaría iniciar esta cuenta regresiva regalándote una subscripción lunita 🌙
   </p>
 
   <img class="extra-img" src="Abby.png" alt="Imagen decorativa o mensaje especial" />
 
   <p style="margin-top: 30px;">Con cariño, Rocelindo 🎈</p>
+
+  <script>
+    function updateCountdown() {
+      const now = new Date();
+      const targetDate = new Date(Date.UTC(2025, 5, 25, 3, 0, 0)); // 25 junio 2025 00:00 UTC-3
+      const diffMs = targetDate - now;
+      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+
+      const title = document.getElementById("countdown-title");
+      if (diffHours > 0) {
+        title.textContent = `Faltan solo ${diffHours} hora${diffHours === 1 ? '' : 's'} para tu cumpleaños`;
+      } else {
+        title.textContent = "¡Feliz cumpleaños! 🎂";
+      }
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 60 * 1000);
+  </script>
 </body>
 </html>
