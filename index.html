@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -72,14 +72,18 @@
     function updateCountdown() {
       const now = new Date();
       const targetDate = new Date(Date.UTC(2025, 5, 25, 3, 0, 0)); // 25 junio 2025 00:00 UTC-3
-      const diffMs = targetDate - now;
-      const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
 
-      const title = document.getElementById("countdown-title");
-      if (diffHours > 0) {
-        title.textContent = `Faltan solo ${diffHours} hora${diffHours === 1 ? '' : 's'} para tu cumpleaños`;
+      const diffMs = targetDate - now;
+
+      if (diffMs > 0) {
+        const totalMinutes = Math.floor(diffMs / (1000 * 60));
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+
+        const title = document.getElementById("countdown-title");
+        title.textContent = `Faltan solo ${hours} hora${hours === 1 ? '' : 's'} y ${minutes} minuto${minutes === 1 ? '' : 's'} para tu cumpleaños`;
       } else {
-        title.textContent = "¡Feliz cumpleaños! 🎂";
+        document.getElementById("countdown-title").textContent = "¡Feliz cumpleaños! 🎂";
       }
     }
 
