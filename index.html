@@ -61,29 +61,64 @@
   <img class="calendar-img" src="junio-25.png" alt="Calendario junio con el día 25 subrayado" />
 
   <p class="message">
-    Falta muy poco para tu cumpleaños, te dejé un pequeño regalito para que puedas aguantar algo la espera 🎁
+    Hoy es un día especial porque tú eres una persona especial, espero que lo disfrutes 🎊
   </p>
 
-  <img class="extra-img" src="lux.gif" alt="Imagen decorativa o mensaje especial" />
+  <img class="extra-img" src="ahri.png" alt="Imagen decorativa o mensaje especial" />
 
-  <p style="margin-top: 30px;">Con la pista de arriba ya sabes donde encontrar el regalo, Rocelindo 🎈</p>
+  <p style="margin-top: 30px;">Te dejé un detalle en la plataforma azul, Rocelindo 🎈</p>
+
+  <!-- 🎉 Confetti library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
   <script>
+    let confettiShown = false;
+
+    function launchConfetti() {
+      const duration = 5 * 1000; // 5 segundos
+      const end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 5,
+          angle: 60,
+          spread: 60,
+          origin: { x: 0 },
+          colors: ['#b3e5fc', '#ffffff', '#f06292']
+        });
+        confetti({
+          particleCount: 5,
+          angle: 120,
+          spread: 60,
+          origin: { x: 1 },
+          colors: ['#b3e5fc', '#ffffff', '#f06292']
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
     function updateCountdown() {
       const now = new Date();
-      const targetDate = new Date(Date.UTC(2025, 5, 25, 3, 0, 0));
+      const targetDate = new Date(Date.UTC(2025, 5, 25, 3, 0, 0)); // 25 junio 2025 00:00 ARG
 
       const diffMs = targetDate - now;
+      const title = document.getElementById("countdown-title");
 
       if (diffMs > 0) {
         const totalMinutes = Math.floor(diffMs / (1000 * 60));
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
-
-        const title = document.getElementById("countdown-title");
         title.textContent = `Faltan solo ${hours} hora${hours === 1 ? '' : 's'} y ${minutes} minuto${minutes === 1 ? '' : 's'} para tu cumpleaños`;
       } else {
-        document.getElementById("countdown-title").textContent = "Feliz cumpleaños chica bonita 🎂";
+        title.textContent = "Feliz cumpleaños chica bonita 🎂";
+
+        if (!confettiShown) {
+          confettiShown = true;
+          launchConfetti();
+        }
       }
     }
 
